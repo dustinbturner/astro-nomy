@@ -48,6 +48,12 @@ The original project was an experiment to see how a modern app (with features li
 - **React 19** with the new React compiler
 - **Tailwind CSS v4** with the latest improvements
 - **Supabase** integration for authentication and database
+  - Server-side rendering (SSR) with cookie-based auth
+  - Client-side authentication
+  - Custom auth helper functions
+- **Resend** for sending transactional emails
+  - Newsletter subscription confirmation
+  - Waitlist signup confirmation
 - Config files
 - Views Transitions
 - Routing and Layouts
@@ -73,7 +79,7 @@ The original project was an experiment to see how a modern app (with features li
 - [x] ~Build **newsletter with React Hook Form & Supabase**~
 - [x] ~Add **Supabase Auth & Database** integration~
 - [x] ~Build **auth/dashboard pages with Shadcn UI**~
-- [ ] ~In-progress **newsletter & waitlist with Resend API**~
+- [x] ~Implement **newsletter & waitlist with Resend API**~
 - [ ] Build **blog with Supabase** (work on it)
 - [ ] Build **ecommerce pages** (work on it)
 - [ ] Add search support for blog *(researching Pagefind vs Fuse.js options)*
@@ -89,7 +95,24 @@ The original project was an experiment to see how a modern app (with features li
 pnpm install
 ```
 
-2. Start the development server:
+2. Copy the example environment file and update with your own values:
+
+```sh
+cp .env.example .env
+```
+
+3. Update the following environment variables in the `.env` file:
+
+```
+# Supabase - Get these from your Supabase project settings
+PUBLIC_SUPABASE_URL=your-supabase-url
+PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+
+# Resend - Get this from your Resend dashboard
+RESEND_API_KEY=your-resend-api-key
+```
+
+4. Start the development server:
 
 ```sh
 pnpm run dev

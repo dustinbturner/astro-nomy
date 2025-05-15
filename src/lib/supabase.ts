@@ -16,32 +16,40 @@ export function createServerClient(astroRequest: Request, astroResponse: Respons
     import.meta.env.PUBLIC_SUPABASE_URL,
     import.meta.env.PUBLIC_SUPABASE_ANON_KEY,
     {
-      // Define how cookies are managed
+      // Define how cookies are managed using the recommended pattern
       cookies: {
-        // Get cookie value by name
-        get(name: string) {
-          return astroRequest.headers.get('cookie')
-            ?.split(';')
-            ?.find(c => c.trim().startsWith(`${name}=`))
-            ?.split('=')[1]
+        // Get all cookies
+        getAll() {
+          const cookieString = astroRequest.headers.get('cookie') || ''
+          return parseCookies(cookieString)
         },
-        // Set cookie
-        set(name: string, value: string, options: CookieOptions) {
-          const cookieHeader = `${name}=${value}${formatOptions(options)}`
-          astroResponse.headers.append('set-cookie', cookieHeader)
-        },
-        // Remove cookie
-        remove(name: string, options: CookieOptions) {
-          const cookieHeader = `${name}=; Max-Age=0${formatOptions(options)}`
-          astroResponse.headers.append('set-cookie', cookieHeader)
-        },
+        // Set all cookies
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            const cookieHeader = `${name}=${value}${formatOptions(options)}`
+            astroResponse.headers.append('set-cookie', cookieHeader)
+          })
+        }
       },
     }
   )
 }
 
+// Helper function to parse cookies from a cookie string
+function parseCookies(cookieString: string) {
+  return cookieString.split(';')
+    .filter(cookie => cookie.trim() !== '')
+    .map(cookie => {
+      const [name, ...rest] = cookie.split('=')
+      const value = rest.join('=')
+      return { name: name.trim(), value }
+    })
+}
+
 // Helper function to format cookie options
-function formatOptions(options: CookieOptions): string {
+function formatOptions(options?: CookieOptions): string {
+  if (!options) return ''
+  
   let parts = ''
   if (options.domain) parts += `; Domain=${options.domain}`
   if (options.path) parts += `; Path=${options.path}`
