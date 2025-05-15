@@ -20,7 +20,7 @@ const formSchema = z.object({
   }),
 });
 
-export function WaitlistForm() {
+export function NewsletterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,7 +30,7 @@ export function WaitlistForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch("/api/waitlist", {
+      const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,23 +41,23 @@ export function WaitlistForm() {
       const data = await response.json();
       
       if (data.message === "success") {
-        toast.success("Thanks for your support!", {
-          description: "We've added your email to the waitlist!",
+        toast.success("Successfully subscribed!", {
+          description: "Thank you for subscribing to our newsletter.",
         });
         form.reset();
-      } else if (data.error === "Email already on waitlist") {
-        toast.info("You're already on the waitlist!", {
-          description: "Thank you for your continued interest.",
+      } else if (data.message === "already_subscribed") {
+        toast.info("You're already subscribed!", {
+          description: "Thank you for your continued support.",
         });
         form.reset();
       } else {
-        toast.error("Something went wrong", {
+        toast.error("Subscription failed", {
           description: data.error || "Please try again later.",
         });
       }
     } catch (error) {
-      console.error("Waitlist submission error:", error);
-      toast.error("Submission failed", {
+      console.error("Newsletter subscription error:", error);
+      toast.error("Subscription failed", {
         description: "Please try again later.",
       });
     }
@@ -65,7 +65,7 @@ export function WaitlistForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -73,19 +73,17 @@ export function WaitlistForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="jonhdoe@example.com" {...field} />
+                <Input placeholder="you@example.com" {...field} />
               </FormControl>
               <FormDescription className="text-[13px]">
-                <i>
-                  Saved securely in Supabase. React form with server validation.
-                </i>
+                We'll never share your email with anyone else.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button variant="default" className="w-full" type="submit">
-          Submit
+          Subscribe
         </Button>
       </form>
     </Form>

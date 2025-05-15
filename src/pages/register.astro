@@ -1,11 +1,25 @@
 ---
-import UserAuthForm from "@/components/forms/user-auth-form.astro";
+import { RegisterForm } from "@/components/register-form";
 import { buttonVariants } from "@/components/ui/button";
 import AuthLayout from "@/layouts/auth-layout.astro";
 import { cn } from "@/lib/utils";
+import { createServerClient } from "@/lib/supabase";
+
+// Check if user is already logged in
+const supabase = createServerClient(Astro.request, new Response());
+const { data: { session } } = await supabase.auth.getSession();
+
+// If user is already logged in, redirect to dashboard
+if (session) {
+  return Astro.redirect('/dashboard');
+}
+
+// Get error message from URL if any
+const url = new URL(Astro.request.url);
+const errorMessage = url.searchParams.get('error');
 ---
 
-<AuthLayout title="Register" description="Register">
+<AuthLayout title="Register" description="Create a new account">
   <a
     href="/login"
     slot="right-corner"
@@ -14,30 +28,20 @@ import { cn } from "@/lib/utils";
     Login
   </a>
 
-  
-  <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-96">
+  <div class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
     <div class="flex flex-col space-y-2 text-center">
       <h1 class="text-2xl font-semibold tracking-tight">Create an account</h1>
       <p class="text-sm text-muted-foreground">
-        Enter your email below to create your account
+        Sign up to get started with our platform
       </p>
     </div>
-    
-    <UserAuthForm />
-    
-    <p class="px-8 text-center text-sm text-muted-foreground">
-      By clicking continue, you agree to our{" "}
-      <a href="/terms" class="underline underline-offset-4 hover:text-primary">
-        Terms of Service
-      </a>{" "}
-       and{" "}
-      <a
-        href="/privacy"
-        class="underline underline-offset-4 hover:text-primary"
-      >
-        Privacy Policy
-      </a>
-       .
-    </p>
+
+    {errorMessage && (
+      <div class="bg-destructive/15 text-destructive text-sm p-3 rounded-md">
+        {errorMessage}
+      </div>
+    )}
+
+    <RegisterForm client:load />
   </div>
 </AuthLayout>

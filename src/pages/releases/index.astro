@@ -4,9 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import MainLayout from "@/layouts/main-layout.astro";
 import { formatDate } from "@/lib/utils";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
-const posts = await getCollection("releases");
-posts.sort((a, b) => +b.data.date - +a.data.date);
+const releases = await getCollection("releases");
+releases.sort((a, b) => +b.data.date - +a.data.date);
 ---
 
 <MainLayout title="Changelog">
@@ -16,14 +17,14 @@ posts.sort((a, b) => +b.data.date - +a.data.date);
       text="Reproduce Astro Starlog template with Tailwind CSS & shadcn/ui."
     />
 
-    <ul class="pt-6">
+    <ul class="pt-6 space-y-12">
       {
-        posts.map((post) => (
-          <li class="flex flex-col max-md:gap-y-4 md:flex-row w-full">
+        releases.map((release) => (
+          <li class="flex flex-col max-md:gap-y-4 md:flex-row w-full border-b pb-12">
             <div class="md:basis-32 lg:basis-56 shrink-0 grow-0">
               <div class="md:sticky md:top-24 w-auto mr-6">
                 <a
-                  href={`/releases/${post.slug}`}
+                  href={`/releases/${release.slug}`}
                   class="flex flex-col gap-y-2 pb-4"
                 >
                   <Badge
@@ -31,19 +32,34 @@ posts.sort((a, b) => +b.data.date - +a.data.date);
                     radius="lg"
                     className="w-14 h-7 justify-center text-md bg_release_version text-white"
                   >
-                    {post.data.versionNumber}
+                    {release.data.versionNumber}
                   </Badge>
                   <span class="text-sm text-muted-foreground">
-                    {formatDate(post.data.date)}
+                    {formatDate(release.data.date)}
                   </span>
                 </a>
               </div>
             </div>
 
-            <div class="prose dark:prose-invert prose-img:rounded-3xl max-w-none w-full pb-24">
-              {post.render().then(({ Content }) => (
-                <Content />
-              ))}
+            <div class="w-full">
+              <div class="mb-4">
+                <a href={`/releases/${release.slug}`}>
+                  <Image 
+                    src={release.data.image.src} 
+                    alt={release.data.image.alt} 
+                    width={720} 
+                    height={360} 
+                    class="rounded-xl overflow-hidden hover:opacity-90 transition-opacity"
+                  />
+                </a>
+              </div>
+              <h2 class="text-2xl font-bold mb-3">
+                <a href={`/releases/${release.slug}`} class="hover:text-primary transition-colors">
+                  {release.data.title}
+                </a>
+              </h2>
+              <p class="text-muted-foreground mb-4">{release.data.description}</p>
+              <a href={`/releases/${release.slug}`} class="inline-block text-primary hover:underline">Read more →</a>
             </div>
           </li>
         ))

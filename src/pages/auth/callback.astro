@@ -1,0 +1,21 @@
+---
+import { createServerClient } from '@/lib/supabase';
+
+// This is the callback route that Supabase Auth redirects to after authentication
+const url = new URL(Astro.request.url);
+const code = url.searchParams.get('code');
+
+if (code) {
+  const supabase = createServerClient(Astro.request, new Response());
+  
+  // Exchange the code for a session
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  
+  if (error) {
+    return Astro.redirect('/login?error=Unable to authenticate', 302);
+  }
+}
+
+// Redirect to the dashboard or home page after successful authentication
+return Astro.redirect('/dashboard', 302);
+---

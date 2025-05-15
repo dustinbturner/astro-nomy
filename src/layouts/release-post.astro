@@ -1,0 +1,55 @@
+---
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn, formatDate } from "@/lib/utils";
+import { Icon } from "astro-icon/components";
+import type { CollectionEntry } from "astro:content";
+import MainLayout from "./main-layout.astro";
+
+type Props = CollectionEntry<"releases"> | { release: CollectionEntry<"releases"> };
+
+const props = Astro.props;
+const release = 'release' in props ? props.release : props;
+const { title, description, date, versionNumber } = release.data;
+---
+
+<MainLayout title={title} description={description}>
+  <div class="container max-w-screen-md py-10">
+    <article class="mx-auto w-full relative prose dark:prose-invert prose-img:rounded-3xl max-w-none prose-headings:font-heading prose-headings:scroll-m-20 prose-p:text-base prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary prose-blockquote:border-opacity-50 prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-ul:my-6 prose-ul:ml-6 prose-ul:list-disc prose-ol:my-6 prose-ol:ml-6 prose-ol:list-decimal prose-li:mt-2 prose-img:rounded-md prose-img:border prose-img:mx-auto">
+      <div class="w-full mb-4 flex">
+        <button
+          onclick="history.back()"
+          class={cn(
+            buttonVariants({ variant: "ghost" }),
+            "inline-flex text-muted-foreground px-0"
+          )}
+          transition:animate="slide"
+        >
+          <Icon name="lucide:chevron-left" class="mr-2 size-4" />
+          Back
+        </button>
+      </div>
+      
+      <div class="flex items-center justify-between mb-6">
+        <Badge
+          variant="default"
+          radius="lg"
+          className="w-14 h-7 justify-center text-md bg_release_version text-white"
+        >
+          {versionNumber}
+        </Badge>
+        <span class="font-medium text-muted-foreground">
+          {formatDate(date)}
+        </span>
+      </div>
+      
+      <h1 class="font-heading text-4xl my-4">
+        {title}
+      </h1>
+      <p>{description}</p>
+      <hr class="my-6" />
+      
+      <slot />
+    </article>
+  </div>
+</MainLayout>

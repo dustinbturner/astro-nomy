@@ -21,7 +21,7 @@ export const navMenuConfig: NavMenuConfig = {
           title: "Waitlist",
           href: "/waitlist",
           description:
-            "A waitlist form using Astro DB, React Hook Form & Sonner. Static page.",
+            "A waitlist form using Supabase, React Hook Form & Sonner. Static page.",
           image: "/images/examples/waitlist.jpg",
           forceReload: true,
         },
@@ -41,7 +41,7 @@ export const navMenuConfig: NavMenuConfig = {
           title: "Newsletter",
           href: "/newsletter",
           description:
-            "A newsletter form using Astro DB & Simple Stack Form. Counter display!",
+            "A newsletter form using Supabase with React Hook Form. Counter display!",
           image: "/images/examples/newsletter.jpg",
         },
       ],
@@ -69,7 +69,7 @@ export const navMenuConfig: NavMenuConfig = {
           title: "Blog DB",
           href: "/blog-db",
           description:
-            "Blog built using Astro DB. With categories, views & likes.",
+            "Blog built using Supabase. With categories, views & likes.",
           // image: "/images/examples/blog-db.jpg",
           disabled: true,
         },
@@ -81,9 +81,9 @@ export const navMenuConfig: NavMenuConfig = {
           // image: "/images/examples/ecommerce.jpg",
         },
         {
-          title: "Authentification",
+          title: "Authentication",
           href: "/auth",
-          description: "Implement an authentification using Astro DB & Lucia",
+          description: "Implement authentication using Supabase Auth",
           // image: "/images/examples/auth.jpg",
           disabled: true,
         },

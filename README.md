@@ -47,6 +47,7 @@ The original project was an experiment to see how a modern app (with features li
 - **Astro v5** with improved performance and features
 - **React 19** with the new React compiler
 - **Tailwind CSS v4** with the latest improvements
+- **Supabase** integration for authentication and database
 - Config files
 - Views Transitions
 - Routing and Layouts
@@ -68,13 +69,13 @@ The original project was an experiment to see how a modern app (with features li
 - [x] ~Add Markdown & MDX support~
 - [x] ~Sheet mobile nav~
 - [x] ~Build **changelog pages**~
-- [x] ~Build **waitlist with React Hook Form**~
-- [x] ~Build **newsletter with Simple Form**~
-- [ ] Build **blog with Astro DB** (work on it)
+- [x] ~Build **waitlist with React Hook Form & Supabase**~
+- [x] ~Build **newsletter with React Hook Form & Supabase**~
+- [x] ~Add **Supabase Auth & Database** integration~
+- [x] ~Build **auth/dashboard pages with Shadcn UI**~
+- [ ] ~In-progress **newsletter & waitlist with Resend API**~
+- [ ] Build **blog with Supabase** (work on it)
 - [ ] Build **ecommerce pages** (work on it)
-- [ ] Add **Supabase Auth & Database** integration
-- [ ] Implement **newsletter with Resend API**
-- [ ] Build **auth/dashboard pages with Shadcn UI**
 - [ ] Add search support for blog *(researching Pagefind vs Fuse.js options)*
 - [ ] Add OG image for blog and others
 - [ ] Add SEO component & metadata

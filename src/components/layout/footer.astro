@@ -1,5 +1,5 @@
 ---
-import { NewsletterForm } from "@/components/forms/newsletter-form";
+import { FooterNewsletterForm } from "@/components/forms/footer-newsletter-form";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { footerLinks, siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -37,9 +37,10 @@ const { className } = Astro.props;
         </div>
       ))
     }
-    <div class="flex flex-col items-end md:col-span-2">
-      Form Newsletter coming soon!
-      <!-- <NewsletterForm client:only="react" /> -->
+    <div class="flex flex-col space-y-4 md:col-span-2">
+      <h3 class="text-sm font-medium text-foreground">Subscribe to our newsletter</h3>
+      <p class="text-sm text-muted-foreground">Get the latest updates and news delivered to your inbox.</p>
+      <FooterNewsletterForm client:idle />
     </div>
   </div>
 
@@ -49,7 +50,7 @@ const { className } = Astro.props;
         Copyright &copy; 2024. All rights reserved.
       </span> -->
       <p class="text-left text-sm text-muted-foreground">
-        Built by{" "}
+        Original built by{" "}
         <a
           href={siteConfig.links.twitter}
           target="_blank"
@@ -58,14 +59,14 @@ const { className } = Astro.props;
         >
           mickasmt
         </a>
-        . Hosted on{" "}
+        . Upgraded by{" "}
         <a
-          href="https://vercel.com"
+          href="https://github.com/dustinturner"
           target="_blank"
           rel="noreferrer"
           class="font-medium underline underline-offset-4"
         >
-          Vercel
+          Dustin Turner
         </a>.
       </p>
 

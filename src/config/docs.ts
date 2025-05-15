@@ -33,7 +33,7 @@ export const docsConfig: DocsConfig = {
           href: "/docs/documentation/components",
         },
         {
-          title: "Configuration  Astro DB",
+          title: "Configuration with Supabase",
           href: "/docs/documentation/components",
           disabled: true,
         },
@@ -83,7 +83,7 @@ export const docsConfig: DocsConfig = {
           disabled: true,
         },
         {
-          title: "Blog with Astro DB",
+          title: "Blog with Supabase",
           href: "/docs/in-progress",
           disabled: true,
         },
@@ -94,7 +94,7 @@ export const docsConfig: DocsConfig = {
         },
 
         {
-          title: "Authentification (Lucia)",
+          title: "Authentication (Supabase)",
           href: "/docs/in-progress",
           disabled: true,
         },

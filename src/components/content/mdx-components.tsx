@@ -107,10 +107,21 @@ export const MdxComponents = {
       {...props}
     />
   ),
-  img: ({ className, class: classProp, alt, ...props }: any) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className, classProp)} alt={alt} {...props} />
-  ),
+  img: ({ className, class: classProp, alt, src, ...props }: any) => {
+    // Handle both relative and absolute paths
+    return (
+      <div className="my-6 flex justify-center">
+        <img 
+          className={cn("rounded-xl max-w-full h-auto", className, classProp)} 
+          alt={alt || "Image"} 
+          src={typeof src === 'object' && src.src ? src.src : src} 
+          width={720} 
+          height={360} 
+          {...props} 
+        />
+      </div>
+    );
+  },
   hr: ({ className, class: classProp, ...props }: Props) => <hr className={cn("my-4 md:my-8", className, classProp)} {...props} />,
   table: ({ className, class: classProp, ...props }: ExtendedHTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">

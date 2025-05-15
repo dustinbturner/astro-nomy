@@ -35,6 +35,7 @@ export interface BadgeProps
     VariantProps<typeof badgeVariants> {
   // Add class prop for Astro compatibility
   class?: string;
+  className?: string;
 }
 
 function Badge({ className, class: classProp, variant, radius, ...props }: BadgeProps) {
