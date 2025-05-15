@@ -70,11 +70,12 @@ The original project was an experiment to see how a modern app (with features li
 - [x] ~Build **changelog pages**~
 - [x] ~Build **waitlist with React Hook Form**~
 - [x] ~Build **newsletter with Simple Form**~
-- [x] ~Build **animes pages** (graphql)~
 - [ ] Build **blog with Astro DB** (work on it)
 - [ ] Build **ecommerce pages** (work on it)
-- [ ] Build **auth/dashboard pages**
-- [ ] Add search support for blog
+- [ ] Add **Supabase Auth & Database** integration
+- [ ] Implement **newsletter with Resend API**
+- [ ] Build **auth/dashboard pages with Shadcn UI**
+- [ ] Add search support for blog *(researching Pagefind vs Fuse.js options)*
 - [ ] Add OG image for blog and others
 - [ ] Add SEO component & metadata
 - [ ] Subscriptions using Stripe (or Lemon Squeezy?)

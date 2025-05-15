@@ -65,29 +65,6 @@ export type SubscriptionPlan = {
   stripePriceId: string;
 };
 
-// Animes types
-export type Airing = {
-  id: number;
-  episode: number;
-  airingAt: number;
-  media: Media;
-};
-
-export type Media = {
-  id: number;
-  title: Title;
-  coverImage: CoverImage;
-  isAdult: boolean;
-};
-
-type Title = {
-  userPreferred: string;
-};
-
-type CoverImage = {
-  extraLarge: string;
-  large: string;
-};
 
 export type InfoList = {
   icon: string;

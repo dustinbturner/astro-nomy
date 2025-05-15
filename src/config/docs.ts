@@ -92,11 +92,7 @@ export const docsConfig: DocsConfig = {
           href: "/docs/in-progress",
           disabled: true,
         },
-        {
-          title: "Animes (GraphQL)",
-          href: "/docs/in-progress",
-          disabled: true,
-        },
+
         {
           title: "Authentification (Lucia)",
           href: "/docs/in-progress",
