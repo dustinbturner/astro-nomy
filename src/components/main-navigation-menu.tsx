@@ -19,6 +19,26 @@ const pages = navMenuConfig.pagesNav[0];
 const examples = navMenuConfig.examplesNav[0];
 
 export function MainNavigationMenu() {
+  // Detect dark mode
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  
+  React.useEffect(() => {
+    // Check initial dark mode
+    setIsDarkMode(document.documentElement.classList.contains('dark'));
+    
+    // Watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          setIsDarkMode(document.documentElement.classList.contains('dark'));
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+    
+    return () => observer.disconnect();
+  }, []);
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -52,7 +72,14 @@ export function MainNavigationMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>{pages.title}</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul 
+              className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]" 
+              style={{ 
+                backgroundColor: isDarkMode ? "#171717" : "#ffffff",
+                borderColor: isDarkMode ? "#262626" : "#e5e5e5",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)"
+              }}
+            >
               {pages.items?.map((page) => (
                 <ListItem key={page.title} {...page} />
               ))}
@@ -63,7 +90,14 @@ export function MainNavigationMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>{examples.title}</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul 
+              className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]" 
+              style={{ 
+                backgroundColor: isDarkMode ? "#171717" : "#ffffff",
+                borderColor: isDarkMode ? "#262626" : "#e5e5e5",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)"
+              }}
+            >
               {examples.items?.map((example) => (
                 <ListItem key={example.title} {...example} />
               ))}
@@ -108,10 +142,10 @@ const ListItem: React.FC<MenuItem> = ({
         href={disabled ? undefined : href}
         {...(forceReload ? { "data-astro-reload": true } : {})}
         className={cn(
-          "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+          "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted hover:text-foreground focus:bg-muted focus:text-foreground",
           disabled
-            ? "text-muted-foreground hover:bg-transparent hover:text-muted-foreground"
-            : ""
+            ? "pointer-events-none opacity-60"
+            : "pointer-events-auto opacity-100"
         )}
       >
         <div className="flex items-center text-sm font-medium leading-none">

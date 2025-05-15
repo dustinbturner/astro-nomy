@@ -7,9 +7,10 @@ import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 import DocsLayout from "./docs-layout.astro";
 
-type Props = CollectionEntry<"guides">;
+type Props = CollectionEntry<"guides"> | { guide: CollectionEntry<"guides"> };
 
-const guide = Astro.props;
+const props = Astro.props;
+const guide = 'guide' in props ? props.guide : props;
 const slug = guide.slug;
 const { title, description, pubDate } = guide.data;
 const toc = await getTableOfContents(guide.body);
@@ -34,7 +35,9 @@ const toc = await getTableOfContents(guide.body);
       </p>
       <hr class="my-6" />
 
-      <slot />
+      <div class="prose dark:prose-invert max-w-none prose-headings:font-heading prose-headings:scroll-m-20 prose-p:text-base prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary prose-blockquote:border-opacity-50 prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic">
+        <slot />
+      </div>
 
       <hr class="flex md:hidden my-4" />
       <div class="flex md:hidden justify-start py-6 lg:py-10">

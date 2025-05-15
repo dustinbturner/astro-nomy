@@ -7,33 +7,35 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import MainLayout from "./main-layout.astro";
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"blog"> | { post: CollectionEntry<"blog"> };
 
-const slug = Astro.props.slug;
-const { title, description, pubDate, updatedDate, cover, category } =
-  Astro.props.data;
+const props = Astro.props;
+const post = 'post' in props ? props.post : props;
+const slug = post.slug;
+const { title, description, pubDate, updatedDate, cover, category } = post.data;
 ---
 
 <MainLayout title={title} description={description}>
-  <div class="relative container max-w-screen-md py-10">
-    <button
-      onclick="history.back()"
-      class={cn(
-        buttonVariants({ variant: "ghost" }),
-        "absolute left-[-200px] top-10 hidden xl:inline-flex text-muted-foreground"
-      )}
-      transition:animate="slide"
-    >
-      <Icon name="lucide:chevron-left" class="mr-2 size-4" />
-      {" "}Back
-    </button>
-
-    <article class="prose dark:prose-invert max-w-none">
+  <div class="container max-w-screen-md py-10">
+    <article class="mx-auto w-full relative">
+      <div class="w-full mb-4 flex">
+        <button
+          onclick="history.back()"
+          class={cn(
+            buttonVariants({ variant: "ghost" }),
+            "inline-flex text-muted-foreground px-0"
+          )}
+          transition:animate="slide"
+        >
+          <Icon name="lucide:chevron-left" class="mr-2 size-4" />
+          Back
+        </button>
+      </div>
       <a
         href={`/blog/category/${category}`}
         transition:name={`badge-cat-${slug}`}
       >
-        <Badge radius="md" className="capitalize">
+        <Badge radius="md" class="capitalize">
           {category}
         </Badge>
       </a>
@@ -63,7 +65,9 @@ const { title, description, pubDate, updatedDate, cover, category } =
       </h1>
       <p>{description}</p>
       <hr class="my-6" />
-      <slot />
+      <div class="prose dark:prose-invert max-w-none prose-headings:font-heading prose-headings:scroll-m-20 prose-p:text-base prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-primary prose-blockquote:border-opacity-50 prose-blockquote:font-normal prose-blockquote:text-muted-foreground prose-blockquote:not-italic prose-ul:my-6 prose-ul:ml-6 prose-ul:list-disc prose-ol:my-6 prose-ol:ml-6 prose-ol:list-decimal prose-li:mt-2 prose-img:rounded-md prose-img:border">
+        <slot />
+      </div>
     </article>
   </div>
 </MainLayout>

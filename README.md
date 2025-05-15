@@ -1,19 +1,23 @@
-# Astronomy
+# Astro-nomy
 
-An open source application built using the latest features in Astro v4 with shadcn/ui.
+A fork of the original [Astronomy](https://github.com/mickasmt/astro-nomy) project, upgraded to use **Astro v5**, **React 19**, and **Tailwind CSS v4**.
+
+This project demonstrates modern web development with the latest versions of these powerful technologies.
 
 ![blog](public/og.jpg)
 
-> **Warning**
-> This app is a work in progress. I'm building this in public. You can follow the progress on Twitter [@miickasmt](https://twitter.com/miickasmt).
-> See the roadmap below.
+> **Note**
+> This is a fork of the original project by [@miickasmt](https://twitter.com/miickasmt), upgraded to use the latest versions of Astro (v5), React (v19), and Tailwind CSS (v4).
 
 ## About this project
 
-This project as an experiment to see how a modern app (with features like authentication, subscriptions, API routes, Markdown, Content Collections ...etc) would work in Astro v4 and shadcn/ui.
+This fork demonstrates how to upgrade the original Astronomy project to use the latest versions of:
 
-> **Note**
-> I would like to inform you that for the time being, my example app built with Astro.js is still under development and **cannot yet be considered a starter template**.
+- **Astro v5** - The latest version with improved performance and features
+- **React 19** - With the new React compiler and improved performance
+- **Tailwind CSS v4** - The latest version with improved developer experience
+
+The original project was an experiment to see how a modern app (with features like authentication, subscriptions, API routes, Markdown, Content Collections, etc.) would work in Astro v4 and shadcn/ui.
 
 ## Project Structure
 
@@ -40,13 +44,15 @@ This project as an experiment to see how a modern app (with features like authen
 
 ## Features
 
+- **Astro v5** with improved performance and features
+- **React 19** with the new React compiler
+- **Tailwind CSS v4** with the latest improvements
 - Config files
 - Views Transitions
 - Routing and Layouts
 - React components & hooks
 - UI Components built using **shadcn/ui**
 - Documentation and blog using **MDX** and **Content Collections**
-- Styled using **Tailwind CSS**
 - Validations using **Zod**
 - Written in **TypeScript**
 - 100/100 Lighthouse performance
@@ -55,11 +61,6 @@ This project as an experiment to see how a modern app (with features like authen
 - Sitemap support
 - Data Fetching
 - API Endpoint
-
-_Not implemented yet :_
-
-- SEO component
-- Subscriptions using **Lemon Squeezy** ?
 
 ## Roadmap
 
@@ -94,7 +95,9 @@ pnpm run dev
 
 ## Credit
 
-This theme is based off of the example app [Taxonomy](https://tx.shadcn.com/) of shadcn.
+- Original project [Astronomy](https://github.com/mickasmt/astro-nomy) by [@miickasmt](https://twitter.com/miickasmt)
+- Upgraded to Astro v5, React 19, and Tailwind CSS v4
+- The original theme was based off of the example app [Taxonomy](https://tx.shadcn.com/) by shadcn
 
 ## License
 

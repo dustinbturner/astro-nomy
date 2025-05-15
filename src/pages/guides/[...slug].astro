@@ -3,17 +3,19 @@ import { MdxComponents } from "@/components/content/mdx-components";
 import GuidePostLayout from "@/layouts/guide-post.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const guides = await getCollection("guides");
   return guides.map((guide) => ({
     params: { slug: guide.slug },
-    props: guide,
+    props: { guide },
   }));
 }
 
-type Props = CollectionEntry<"guides">;
+type Props = { guide: CollectionEntry<"guides"> };
 
-const guide = Astro.props;
+const { guide } = Astro.props;
 const slug = Astro.params.slug;
 const { Content } = await guide.render();
 

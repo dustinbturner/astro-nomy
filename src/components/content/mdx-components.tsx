@@ -5,112 +5,121 @@ import MdxCard from "@/components/content/mdx-card.astro";
 import { cn } from "@/lib/utils";
 import { Image } from "astro:assets";
 
-type Props = {
+// Extended type for HTML attributes with additional class prop for Astro compatibility
+type ExtendedHTMLAttributes<T> = React.HTMLAttributes<T> & {
+  class?: string;
+}
+
+type Props = ExtendedHTMLAttributes<HTMLElement> & {
   className?: string;
+  class?: string;
 }
 
 export const MdxComponents = {
-  h1: ({ className, ...props }: Props) => (
+  h1: ({ className, class: classProp, ...props }: Props) => (
     <h1
       className={cn(
         "mt-2 scroll-m-20 text-4xl font-bold tracking-tight",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  h2: ({ className, ...props }: Props) => (
+  h2: ({ className, class: classProp, ...props }: Props) => (
     <h2
       className={cn(
         "mt-10 scroll-m-20 border-b pb-1 text-2xl font-semibold tracking-tight first:mt-0",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  h3: ({ className, ...props }: Props) => (
+  h3: ({ className, class: classProp, ...props }: Props) => (
     <h3
       className={cn(
         "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  h4: ({ className, ...props }: Props) => (
+  h4: ({ className, class: classProp, ...props }: Props) => (
     <h4
       className={cn(
         "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  h5: ({ className, ...props }: Props) => (
+  h5: ({ className, class: classProp, ...props }: Props) => (
     <h5
       className={cn(
         "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  h6: ({ className, ...props }: Props) => (
+  h6: ({ className, class: classProp, ...props }: Props) => (
     <h6
       className={cn(
         "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  a: ({ className, ...props }: Props) => (
+  a: ({ className, class: classProp, ...props }: Props) => (
     <a
-      className={cn("font-medium underline underline-offset-4", className)}
+      className={cn("font-medium underline underline-offset-4", className, classProp)}
       {...props}
     />
   ),
-  p: ({ className, ...props }: Props) => (
+  p: ({ className, class: classProp, ...props }: Props) => (
     <p
-      className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+      className={cn("leading-7 [&:not(:first-child)]:mt-6", className, classProp)}
       {...props}
     />
   ),
-  ul: ({ className, ...props }: Props) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+  ul: ({ className, class: classProp, ...props }: Props) => (
+    <ul className={cn("my-6 ml-6 list-disc", className, classProp)} {...props} />
   ),
-  ol: ({ className, ...props }: Props) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+  ol: ({ className, class: classProp, ...props }: Props) => (
+    <ol className={cn("my-6 ml-6 list-decimal", className, classProp)} {...props} />
   ),
-  li: ({ className, ...props }: Props) => (
-    <li className={cn("mt-2", className)} {...props} />
+  li: ({ className, class: classProp, ...props }: Props) => (
+    <li className={cn("mt-2", className, classProp)} {...props} />
   ),
-  blockquote: ({ className, ...props }: Props) => (
+  blockquote: ({ className, class: classProp, ...props }: Props) => (
     <blockquote
       className={cn(
         "mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground",
-        className
+        className,
+        classProp
       )}
       {...props}
     />
   ),
-  img: ({
-    className,
-    alt,
-    ...props
-  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+  img: ({ className, class: classProp, alt, ...props }: any) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
+    <img className={cn("rounded-md border", className, classProp)} alt={alt} {...props} />
   ),
-  hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
-  table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+  hr: ({ className, class: classProp, ...props }: Props) => <hr className={cn("my-4 md:my-8", className, classProp)} {...props} />,
+  table: ({ className, class: classProp, ...props }: ExtendedHTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">
-      <table className={cn("w-full", className)} {...props} />
+      <table className={cn("w-full", className, classProp)} {...props} />
     </div>
   ),
-  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+  tr: ({ className, class: classProp, ...props }: ExtendedHTMLAttributes<HTMLTableRowElement>) => (
     <tr
-      className={cn("m-0 border-t p-0 even:bg-muted", className)}
+      className={cn("m-0 border-t p-0 even:bg-muted", className, classProp)}
       {...props}
     />
   ),

@@ -1,18 +1,21 @@
 ---
 import BlogPostLayout from '@/layouts/blog-post.astro';
+import { MdxComponents } from '@/components/content/mdx-components';
 import { getCollection, type CollectionEntry } from 'astro:content';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
 		params: { slug: post.slug },
-		props: post,
+		props: { post },
 	}));
 }
 
-type Props = CollectionEntry<'blog'>;
+type Props = { post: CollectionEntry<'blog'> };
 
-const post = Astro.props;
+const { post } = Astro.props;
 const slug = Astro.params.slug;
 const { Content } = await post.render();
 
@@ -24,5 +27,5 @@ if (!slug || !post) {
 }
 ---
 <BlogPostLayout {...post}>
-	<Content />
+	<Content components={MdxComponents} />
 </BlogPostLayout>

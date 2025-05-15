@@ -12,9 +12,11 @@ const { className } = Astro.props;
 
 <header
   class={cn(
-    "flex items-center h-16 md:h-18 z-50 sticky top-0 bg-background",
+    "flex items-center h-16 md:h-18 z-50 sticky top-0 border-b shadow-sm",
     className
   )}
+  id="main-header"
+  style="background-color: #ffffff;"
 >
   <div class="relative container flex items-center justify-between w-full">
     <div class="flex items-center gap-6 md:gap-8 lg:gap-10">

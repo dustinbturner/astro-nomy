@@ -32,11 +32,17 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  // Add class prop for Astro compatibility
+  class?: string;
+}
 
-function Badge({ className, variant, radius, ...props }: BadgeProps) {
+function Badge({ className, class: classProp, variant, radius, ...props }: BadgeProps) {
+  // Combine className and class props for compatibility with both React and Astro
+  const combinedClassName = cn(badgeVariants({ variant, radius }), className, classProp);
+  
   return (
-    <div className={cn(badgeVariants({ variant, radius }), className)} {...props} />
+    <div className={combinedClassName} {...props} />
   )
 }
 
