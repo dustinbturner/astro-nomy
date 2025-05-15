@@ -2,7 +2,7 @@ import db from "@astrojs/db";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
