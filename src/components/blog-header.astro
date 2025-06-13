@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getCategories } from "@/lib/fetchers";
 import { cn } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
+import Search from "astro-pagefind/components/Search";
 
 const categories = await getCategories();
 
@@ -17,12 +18,13 @@ const { category } = Astro.params;
 <h1 class="inline-block font-heading text-4xl">{title}</h1>
 
 <div class="flex items-start justify-between my-6 max-md:gap-4">
-  <div
+  <!-- <div
     class="flex items-center lg:w-full max-w-xs h-10 rounded-md px-2 lg:px-3 border text-muted-foreground"
   >
     <Icon name="ri:search-line" class="size-5" />
     <span class="text-sm ml-2 hidden lg:flex">Search (coming soon)</span>
-  </div>
+  </div> -->
+  <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
 
   {
     categories?.length ? (
